@@ -9,7 +9,7 @@ class wikiChangesTest(unittest.TestCase):
         #tests proper url creation
 
     def test_main(self):
-        self.assertEqual(type(main()), dict) #tests dict creation
+        self.assertEqual(type(main()), list) #tests list creation
 
 if __name__ == '__main__':
     unittest.main()
