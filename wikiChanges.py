@@ -14,7 +14,19 @@ def main():
     context = ssl._create_unverified_context()
     response = urlopen(url, context=context)
     changeData = json.loads(response.read())
-    print(changeData)
+
+    pageID = list(changeData['query']['pages'].keys())[0] #I couldn't find how on the API so I am brute forcing it >:)
+
+    Revisions = changeData['query']['pages'][pageID]['revisions'] #gets the revision histor
+
+    if(len(Revisions) >= 30): #Checks amount of revisions, if less than 30 we go by the length of the list
+        for i in range(0, 29):
+            print(Revisions[i]['timestamp'] + ' ' + Revisions[i]['user'] + '\n')
+    
+    else:
+        for i in range(0, len(changeData)):
+            print(Revisions[i]['timestamp'] + ' ' + Revisions[i]['user'] + '\n')
+
     return changeData
 
 main()
