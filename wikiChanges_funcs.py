@@ -1,0 +1,52 @@
+import json
+import ssl
+from urllib.request import urlopen
+import urllib.error
+
+def inputConversion(articleTitle):  #converts input article title into a wikipedia api url
+    articleConversion = articleTitle.translate({ord(i): '%20' for i in ' '})
+    url = "https://en.wikipedia.org/w/api.php?action=query&format=json&prop=revisions&titles=" + articleConversion + "&rvprop=timestamp|user&rvlimit=30&redirects"
+    return url
+
+def URLErrorExceptionCheck(articleTitle):
+    try:
+        url = inputConversion(articleTitle)
+        context = ssl._create_unverified_context()
+        response = urlopen(url, context=context)
+        changeData = json.loads(response.read())
+        return changeData
+    except urllib.error.URLError:      #network error exception
+        errorCode = "Error Code 3: Network Error"
+        print(errorCode)
+        return errorCode
+
+def invalidInputCheck(changeData, articleTitle):
+    if changeData['batchcomplete'] == '':
+            if articleTitle.isspace() or articleTitle == "":
+                errorCode = "Error Code 1: No User Input"
+                print(errorCode)
+                return errorCode
+                
+            else:
+                errorCode = "Error Code 2: Article Does Not Exist"
+                print(errorCode)
+                return errorCode
+                
+
+def redirectCheck(changeData):
+    try:    #check for redirects
+        print("\nRedirected from '" + str(changeData['query']['normalized'][0]['from']) + "' to '" + str(changeData['query']['normalized'][0]['to']) + "'.\n")
+    except KeyError:
+        print("")
+
+def printRevisions(changeData):
+    pageID = list(changeData['query']['pages'].keys())[0] #I couldn't find how on the API so I am brute forcing it >:)
+    Revisions = changeData['query']['pages'][pageID]['revisions'] #gets the revision history
+
+    if(len(Revisions) >= 30): #Checks amount of revisions, if less than 30 we go by the length of the list
+        for i in range(0, 29):
+            print(Revisions[i]['timestamp'] + ' ' + Revisions[i]['user'] + '\n')
+    
+    else:
+        for i in range(0, len(Revisions)):
+            print(Revisions[i]['timestamp'] + ' ' + Revisions[i]['user'] + '\n')
