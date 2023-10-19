@@ -14,5 +14,6 @@ def main():
     except KeyError:    #run if user input exists AND matches an article title
         redirectCheck(changeData)
         printRevisions(changeData)
+        print("Error Code 0: Exitting")
         
 main()
