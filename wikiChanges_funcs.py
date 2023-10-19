@@ -29,7 +29,7 @@ def invalidInputCheck(changeData, articleTitle):       #checks for lack of user 
                 return errorCode
                 
             else:
-                errorCode = "Error Code 2: Article Does Not Exist"
+                errorCode = "Error Code 2: Article: '" + articleTitle + "' Does Not Exist"
                 print(errorCode)
                 return errorCode
                 
@@ -45,7 +45,7 @@ def printRevisions(changeData):             #prints the list of revisions
     Revisions = changeData['query']['pages'][pageID]['revisions'] #gets the revision history
 
     if(len(Revisions) >= 30): #Checks amount of revisions, if less than 30, go by the length of the list
-        for i in range(0, 29):
+        for i in range(0, 30):
             print(Revisions[i]['timestamp'] + ' ' + Revisions[i]['user'] + '\n')
     
     else:
