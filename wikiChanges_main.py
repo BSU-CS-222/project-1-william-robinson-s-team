@@ -3,9 +3,9 @@ from wikiChanges_funcs import URLErrorExceptionCheck, invalidInputCheck, redirec
 def main():
     articleTitle = str(input("Please enter the title of the article: "))
 
-    changeData = URLErrorExceptionCheck(articleTitle)
+    changeData = URLErrorExceptionCheck(articleTitle)     #convert article title to api url, check for network error, and retrieve data
 
-    if changeData == "Error Code 3: Network Error":
+    if changeData == "Error Code 3: Network Error":   #exit program if there is a network error
         quit()
     
     try:    #check for lack of input or nonexistant title

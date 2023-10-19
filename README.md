@@ -1,4 +1,9 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/qOno1FyB)
-[![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-718a45dd9cf7e7f842a935f5ebbe5719a5e09af4491e668f4dbf3b35d5cca122.svg)](https://classroom.github.com/online_ide?assignment_repo_id=12187594&assignment_repo_type=AssignmentRepo)
-# Project 1
-Please review the requirements on Canvas.
+Authors: William Robinson & Noah King
+Version: 1.0
+Date: October 19th, 2023
+
+Desc: This program will show the recent revision history of the Wikipedia article input by the User. It shows no more than 30 of the most recent revisions. The program will exit with an error code if an issue arises.
+
+Error Code 1. There is no User input.
+Error Code 2. The article title input by the User doesn't exist.
+Error Code 3. There is a network error.

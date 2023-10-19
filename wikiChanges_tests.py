@@ -9,12 +9,12 @@ class wikiChanges_tests(unittest.TestCase):
         self.assertEqual(inputConversion(articleTitle), "https://en.wikipedia.org/w/api.php?action=query&format=json&prop=revisions&titles=Ball%20State%20University&rvprop=timestamp|user&rvlimit=30&redirects")
         #tests proper url creation
 
-    def test_blankInput(self):
+    def test_blankInput(self):   #tests lack of user input
         articleTitle = ""
         changeData = {"batchcomplete":""}
         self.assertEqual(invalidInputCheck(changeData, articleTitle), "Error Code 1: No User Input")
 
-    def test_nonexistantArticle(self):
+    def test_nonexistantArticle(self):     #tests artilce title that doesn't exist
         articleTitle = "jfejfiejfiejf"
         changeData = {"batchcomplete":""}
         self.assertEqual(invalidInputCheck(changeData, articleTitle), "Error Code 2: Article Does Not Exist")
