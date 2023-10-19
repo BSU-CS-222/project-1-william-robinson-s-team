@@ -15,9 +15,9 @@ class wikiChanges_tests(unittest.TestCase):
         self.assertEqual(invalidInputCheck(changeData, articleTitle), "Error Code 1: No User Input")
 
     def test_nonexistantArticle(self):     #tests artilce title that doesn't exist
-        articleTitle = "ball state university"
+        articleTitle = "efsfsegsfgdg"
         changeData = {"batchcomplete":""}
-        self.assertEqual(invalidInputCheck(changeData, articleTitle), "Error Code 2: Article Does Not Exist")
+        self.assertEqual(invalidInputCheck(changeData, articleTitle), "Error Code 2: Article: '" + articleTitle + "' Does Not Exist")
             
 
 if __name__ == '__main__':
