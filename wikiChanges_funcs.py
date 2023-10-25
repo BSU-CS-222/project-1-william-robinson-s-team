@@ -51,3 +51,4 @@ def printRevisions(changeData):             #prints the list of revisions
     else:
         for i in range(0, len(Revisions)):
             print(Revisions[i]['timestamp'] + ' ' + Revisions[i]['user'] + '\n')
+    return Revisions
