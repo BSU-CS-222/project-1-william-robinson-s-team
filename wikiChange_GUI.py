@@ -1,4 +1,5 @@
 import tkinter as tk
+import tkinter.scrolledtext as st
 import time
 
 from wikiChanges_funcs import *
@@ -25,9 +26,10 @@ def GUI():
 
 def GUI_PrintRevisions(title):
     changeData = URLErrorExceptionCheck(title)
+    wikiRevisionBox = st.ScrolledText(root, width = 60, height = 25, font=("Helvetica", 10))
 
     if changeData == "Error Code 3: Network Error":   #exit program if there is a network error
-        quit()
+        wikiRevisionBox.insert(tk.INSERT, changeData)
 
     try:    #check for lack of input or nonexistant title
         invalidInputCheck(changeData, title)
@@ -35,11 +37,11 @@ def GUI_PrintRevisions(title):
     except KeyError:    #run if user input exists AND matches an article title
         redirectCheck(changeData)
         Revisions = printRevisions(changeData)
+        
         for i in Revisions:
-            wikiRevisionLabel = tk.Label(root, text=i['timestamp'] + ' ' + i['user'] + '\n', font=("Helvetica", 5))
-            wikiRevisionLabel.pack()
-
+            wikiRevisionBox.insert(tk.INSERT, i['timestamp'] + ' ' + i['user'] + '\n')
             #NOTE: Do NOT use sleep to test for the GUI. It will freeze the GUI.
+        wikiRevisionBox.pack()
         
 
         print("Error Code 0: Exitting")
