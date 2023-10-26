@@ -19,20 +19,29 @@ def GUI():
     wikiTitleLabel.pack()
     wikiTitleEntry.pack()
 
-    printButton = tk.Button(root, text="Print Revisions", command=lambda: GUI_PrintRevisions(wikiTitle.get()))
-    printButton.pack()
+    wikiRevisionBox = st.ScrolledText(root, width = 60, height = 25, font=("Helvetica", 10))
 
+    printButton = tk.Button(root, text="Print Revisions", command=lambda: GUI_PrintRevisions(wikiTitle.get(), wikiRevisionBox))
+    printButton.pack()
+    
     root.mainloop()
 
-def GUI_PrintRevisions(title):
+def GUI_PrintRevisions(title, wikiRevisionBox):
     changeData = URLErrorExceptionCheck(title)
-    wikiRevisionBox = st.ScrolledText(root, width = 60, height = 25, font=("Helvetica", 10))
+    wikiRevisionBox.delete("1.0", "end")
 
     if changeData == "Error Code 3: Network Error":   #exit program if there is a network error
         wikiRevisionBox.insert(tk.INSERT, changeData)
+        wikiRevisionBox.pack()
 
     try:    #check for lack of input or nonexistant title
-        invalidInputCheck(changeData, title)
+        errorCode = invalidInputCheck(changeData, title)
+        if errorCode == "Error Code 1: No User Input":
+            wikiRevisionBox.insert(tk.INSERT, errorCode)
+        else:
+            wikiRevisionBox.insert(tk.INSERT, errorCode)
+        wikiRevisionBox.pack()
+        
     
     except KeyError:    #run if user input exists AND matches an article title
         redirectCheck(changeData)
@@ -45,5 +54,8 @@ def GUI_PrintRevisions(title):
         
 
         print("Error Code 0: Exitting")
+
+    except TypeError:
+        return
 
 GUI()
