@@ -1,26 +1,25 @@
 import tkinter as tk
+import time
 
 from wikiChanges_funcs import *
 
+root = tk.Tk()
+root.title("Wikipedia Revision Search")
+root.geometry("500x500")
+
 def GUI():
-    root = tk.Tk()
-    root.title("Wikipedia Revision Search")
-    root.geometry("500x500")
+    
 
     wikiTitle = tk.StringVar()
 
     wikiTitleLabel = tk.Label(root, text="Enter Wikipedia Article Title: ")
     wikiTitleEntry = tk.Entry(root, textvariable=wikiTitle)
 
-    wikiTitleLabel.grid(row=0, column=0)
-    wikiTitleEntry.grid(row=0, column=1)
+    wikiTitleLabel.pack()
+    wikiTitleEntry.pack()
 
     printButton = tk.Button(root, text="Print Revisions", command=lambda: GUI_PrintRevisions(wikiTitle.get()))
-    printButton.grid(row=1, column=0)
-
-
-
-
+    printButton.pack()
 
     root.mainloop()
 
@@ -35,10 +34,14 @@ def GUI_PrintRevisions(title):
     
     except KeyError:    #run if user input exists AND matches an article title
         redirectCheck(changeData)
-        printRevisions(changeData)
+        Revisions = printRevisions(changeData)
+        for i in Revisions:
+            wikiRevisionLabel = tk.Label(root, text=i['timestamp'] + ' ' + i['user'] + '\n', font=("Helvetica", 5))
+            wikiRevisionLabel.pack()
+
+            #NOTE: Do NOT use sleep to test for the GUI. It will freeze the GUI.
+        
+
         print("Error Code 0: Exitting")
-    
-
-
 
 GUI()
