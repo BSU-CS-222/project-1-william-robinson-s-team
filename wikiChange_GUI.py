@@ -28,7 +28,7 @@ def GUI():
 
 def GUI_PrintRevisions(title, wikiRevisionBox):
     changeData = URLErrorExceptionCheck(title)
-    wikiRevisionBox.delete("1.0", "end")
+    wikiRevisionBox.delete("1.0", "end") #reset contents of scrolled text box
 
     if changeData == "Error Code 3: Network Error":   #exit program if there is a network error
         wikiRevisionBox.insert(tk.INSERT, changeData)
