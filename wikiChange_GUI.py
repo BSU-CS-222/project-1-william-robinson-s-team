@@ -43,7 +43,7 @@ def GUI_PrintRevisions(title, wikiRevisionBox, redirectLabel):
         
     
     except KeyError:    #run if user input exists AND matches an article title
-        redirect = redirectCheckGUI(changeData)
+        redirect = redirectCheck(changeData)
         redirectLabel.config(text = redirect)
         redirectLabel.pack()
         Revisions = getRevisions(changeData)

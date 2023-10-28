@@ -30,20 +30,14 @@ def invalidInputCheck(changeData, articleTitle):       #checks for lack of user 
             else:
                 errorCode = "Error Code 2: Article: '" + articleTitle + "' Does Not Exist"
                 return errorCode
-                
 
-def redirectCheckMain(changeData):     #checks for any redirects
-    try:    
-        print("\nRedirected from '" + str(changeData['query']['normalized'][0]['from']) + "' to '" + str(changeData['query']['normalized'][0]['to']) + "'.\n")
-    except KeyError:
-        print("")
-
-def redirectCheckGUI(changeData):
+def redirectCheck(changeData):
     try:
         redirect = "\nRedirected from '" + str(changeData['query']['normalized'][0]['from']) + "' to '" + str(changeData['query']['normalized'][0]['to']) + "'.\n"
         return redirect
     except KeyError:
-        return
+        redirect = "\n"
+        return redirect
 
 def getRevisions(changeData):             #prints the list of revisions
     pageID = list(changeData['query']['pages'].keys())[0] #gets the page id
