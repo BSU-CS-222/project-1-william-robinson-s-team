@@ -27,7 +27,7 @@ def GUI():
 def GUI_PrintRevisions(title, wikiRevisionBox, redirectLabel):
     changeData = URLErrorExceptionCheck(title)
     wikiRevisionBox.delete("1.0", "end") #reset contents of scrolled text box
-    redirectLabel.config(text = "")
+    redirectLabel.config(text = "")      #reset redirect label contents
 
     if changeData == "Error Code 3: Network Error":   #exit program if there is a network error
         wikiRevisionBox.insert(tk.INSERT, changeData)
