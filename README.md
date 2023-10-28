@@ -8,4 +8,5 @@ Error Code 1. There is no User input.
 Error Code 2. The article title input by the User doesn't exist.
 Error Code 3. There is a network error.
 
-Run wikiChanges_main.py to run the program!
+Run wikiChanges_main.py to run the command line version.
+Run wikiChange_GUI.py to run the GUI version.

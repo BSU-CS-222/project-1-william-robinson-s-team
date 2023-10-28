@@ -49,7 +49,7 @@ def GUI_PrintRevisions(title, wikiRevisionBox, redirectLabel):
         Revisions = getRevisions(changeData)
         
         for i in Revisions:
-            wikiRevisionBox.insert(tk.INSERT, i['timestamp'] + ' ' + i['user'] + '\n')
+            wikiRevisionBox.insert(tk.INSERT, i['timestamp'] + ': ' + i['user'] + '\n')
             #NOTE: Do NOT use sleep to test for the GUI. It will freeze the GUI.
         wikiRevisionBox.pack()
 
