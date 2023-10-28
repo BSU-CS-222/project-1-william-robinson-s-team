@@ -25,24 +25,32 @@ def invalidInputCheck(changeData, articleTitle):       #checks for lack of user 
     if changeData['batchcomplete'] == '':
             if articleTitle.isspace() or articleTitle == "":
                 errorCode = "Error Code 1: No User Input"
-                print(errorCode)
                 return errorCode
                 
             else:
                 errorCode = "Error Code 2: Article: '" + articleTitle + "' Does Not Exist"
-                print(errorCode)
                 return errorCode
                 
 
-def redirectCheck(changeData):     #checks for any redirects
+def redirectCheckMain(changeData):     #checks for any redirects
     try:    
         print("\nRedirected from '" + str(changeData['query']['normalized'][0]['from']) + "' to '" + str(changeData['query']['normalized'][0]['to']) + "'.\n")
     except KeyError:
         print("")
 
-def printRevisions(changeData):             #prints the list of revisions
+def redirectCheckGUI(changeData):
+    try:
+        redirect = "\nRedirected from '" + str(changeData['query']['normalized'][0]['from']) + "' to '" + str(changeData['query']['normalized'][0]['to']) + "'.\n"
+        return redirect
+    except KeyError:
+        return
+
+def getRevisions(changeData):             #prints the list of revisions
     pageID = list(changeData['query']['pages'].keys())[0] #gets the page id
     Revisions = changeData['query']['pages'][pageID]['revisions'] #gets the revision history
+    return Revisions
+
+def printRevisions(Revisions):
 
     if(len(Revisions) >= 30): #Checks amount of revisions, if less than 30, go by the length of the list
         for i in range(0, 30):
@@ -51,4 +59,4 @@ def printRevisions(changeData):             #prints the list of revisions
     else:
         for i in range(0, len(Revisions)):
             print(Revisions[i]['timestamp'] + ' ' + Revisions[i]['user'] + '\n')
-    return Revisions
+    
